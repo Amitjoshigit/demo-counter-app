@@ -27,12 +27,10 @@ pipeline{
         //         }
         //     }
         // }
-        stage('maven building'){
-            
-            steps{
-                
-                script{
-                    bat 'maven clean install'
+       stage('Maven Build') {
+            steps {
+                script {
+                    bat 'mvn clean install '
                 }
             }
         }
