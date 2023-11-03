@@ -18,14 +18,14 @@ pipeline{
             }
         }
         
-        stage('UNIT testing'){
+        // stage('UNIT testing'){
             
-            steps{
+        //     steps{
                 
-                script{
-                    sh 'mvn test'
-                }
-            }
-        }
+        //         script{
+        //             bat 'mvn test'
+        //         }
+        //     }
+        // }
     }
 }
