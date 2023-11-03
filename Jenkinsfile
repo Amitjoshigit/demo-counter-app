@@ -18,19 +18,11 @@ pipeline{
             }
         }
         
-        // stage('UNIT testing'){
-            
-        //     steps{
-                
-        //         script{
-        //             bat 'mvn test'
-        //         }
-        //     }
-        // }
+        
        stage('Maven Build') {
             steps {
                 script {
-                    bat 'mvn clean install '
+                    bat "mvn clean install"
                 }
             }
         }
