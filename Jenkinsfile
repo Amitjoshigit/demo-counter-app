@@ -17,6 +17,13 @@ pipeline{
                 }
             }
         }
+        stage('Interation testting') {
+            steps {
+                script {
+                    bat "mvn verify -DskiUnitTests"
+                }
+            }
+        }
         
         
        stage('Maven Build') {
