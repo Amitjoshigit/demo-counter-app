@@ -1,52 +1,53 @@
-pipeline{
-    agent any 
-    
+pipeline {
+    agent any
+
     tools {
         maven 'Maven_Home'
     }
-    
+
     stages {
-        
-        stage('Git Checkout'){
-            
-            steps{
-                
-                script{
-                    
+        stage('Git Checkout') {
+            steps {
+                script {
                     git branch: 'main', url: 'https://github.com/Amitjoshigit/demo-counter-app.git'
                 }
             }
         }
-        stage('Interation testting') {
+
+        stage('Interation testing') {
             steps {
                 script {
                     bat "mvn verify -DskiUnitTests"
                 }
             }
         }
-        
-        
-       stage('Maven Build') {
+
+        stage('Maven Build') {
             steps {
                 script {
                     bat "mvn clean install"
                 }
             }
         }
+
         stage('Static code analysis') {
             steps {
-                script{
-                    withSonarQubeEnv(credentialsId: 'sonar-apii'){
-                     bat 'mvn clean package sonar:sonar '
-                }
+                script {
+                    withSonarQubeEnv(credentialsId: 'sonar-apii') {
+                        bat 'mvn clean package sonar:sonar'
+                    }
                 }
             }
         }
-        stage('Quality gate status'){
-            steps{
-                script{
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-apii'
-                }
+
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate(
+                    server: 'sonarserver',
+                    task: 'AYujlDOqcobOOIb2kwzr',
+                    abortPipeline: true,
+                    timeout: 60000 // 60 seconds
+                )
             }
         }
     }
