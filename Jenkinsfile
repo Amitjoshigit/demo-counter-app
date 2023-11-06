@@ -43,10 +43,8 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 waitForQualityGate(
-                    server: 'sonarserver',
-                    task: 'AYujlDOqcobOOIb2kwzr',
                     abortPipeline: true,
-                    timeout: 60000 // 60 seconds
+                    credentialsId: 'sonar-apii'
                 )
             }
         }
