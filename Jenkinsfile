@@ -44,8 +44,20 @@ pipeline {
             steps{
                 script {
 
-                nexusArtifactUploader artifacts: [
-                    [artifactId: 'springboot', classifier: '', file: 'target/Uber.jar', type: 'jar']], credentialsId: 'nexus-auth', groupId: 'com.example', nexusUrl: 'localhost:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'demo-app', version: '1.0.0'
+                    def readPomVersion = readMavenPom file:'pom.xml'
+                    nexusArtifactUploader artifacts:
+                 [
+                    [artifactId: 'springboot',
+                     classifier: '', file: 'target/Uber.jar',
+                      type: 'jar']
+                    ],
+                     credentialsId: 'nexus-auth', 
+                     groupId: 'com.example',
+                      nexusUrl: 'localhost:8081/',
+                       nexusVersion: 'nexus3',
+                        protocol: 'http',
+                         repository: 'demo-app',
+                          version: "${readPomVersion.version}"
                 }
             }
         }
