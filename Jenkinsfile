@@ -40,8 +40,6 @@ pipeline {
             }
         }
 
-       stages {
-        // Stages omitted for brevity
         stage('uploading war'){
             steps{
                 script {
@@ -63,5 +61,4 @@ pipeline {
             }
         }
     }
-}
 }
